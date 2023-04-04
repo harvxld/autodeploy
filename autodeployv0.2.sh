@@ -52,6 +52,7 @@ auto(){
         done
     fi
     sudo apt install git ffmpeg bat
+    echo; echo "Deployment finished."; echo "Please logout and login back to your account to switch to Z Shell."
 }
 
 #Fonction pour installer les outils vmware
@@ -63,10 +64,9 @@ vmware(){
 }
 
 #Vérification des arguments
-while getopts 'vha' OPTION; do
+while getopts 'vhazpc:' OPTION; do
   case "$OPTION" in
     v)
-      auto; echo; echo "Deployment finished."; echo "Please logout and login back to your account to switch to Z Shell."; exit;
       vmware;
       ;;
     h)
@@ -75,13 +75,24 @@ while getopts 'vha' OPTION; do
       echo
       echo "-a: automatic deployment"
       echo "-h: display help"
-      echo "-v: automatic deployment + open-vm-tools"
-      echo "start script without arguments to show main menu"
+      echo "-v: install open-vm-tools"
+      echo "-c: install additional packages [Usage : ./autodeploy.sh -c foo bar]"
+      echo "-z: install zsh"
+      echo "-p: only install default packages (git, ffmpeg, bat)"
       echo
-      exit
       ;;
     a)
-      auto; echo; echo "Deployment finished."; echo "Please logout and login back to your account to switch to Z Shell."; exit;
+      auto;
+      ;;
+    z)
+      install_zsh;
+      ;;
+    p)
+      sudo apt install git ffmpeg bat
+      ;;
+    c)
+      pkgs="$OPTARG"
+      sudo apt install $pkgs
       ;;
     ?)
       echo "script usage: $(basename $0) [-a] [-h] [-v]" >&2
@@ -90,35 +101,3 @@ while getopts 'vha' OPTION; do
   esac
 done
 shift "$(($OPTIND -1))"
-
-# Afficher un menu dans une boucle
-while true; do
-clear
-echo "1. Automatic deployment"
-echo "2. Update & upgrade packages"
-echo "3. Install Zsh"
-echo "4. Edit ~/.zshrc"
-echo "5. Install packages"
-echo "6. Quit"
-echo
-read -p "Choose a number: " num
-    case $num in 
-        [1] ) auto; read -p "Press key to continue:"; break;
-            ;;
-        [2] ) up; read -p "Press key to continue:";
-            ;;
-        [3] ) install_zsh; read -p "Press key to continue:";
-            ;;
-        [4] ) sudo nano ~/.zshrc;
-            ;;
-        [5] ) sudo apt install git ffmpeg bat dmidecode;
-            read -p "Press key to continue:";
-            ;;
-        [6] )clear;
-            break;;
-        * ) echo invalid response; read -p "";
-    esac
-    done
-echo "Please logout and login back to your account to switch to Z Shell."
-
-test
