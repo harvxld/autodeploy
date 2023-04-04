@@ -1,4 +1,5 @@
-Automatic deployment of Z Shell and few packages as well as updating system and existing packages
+Automatic deployment of Z Shell and few packages as well as updating system and existing packages.
+
 Only compatible with apt (Ubuntu, Debian..)
 
 # Features
@@ -13,8 +14,9 @@ Only compatible with apt (Ubuntu, Debian..)
 
 Start script without arguments to show main menu
 
-autodeploy.sh [-a] [-h] [-v]
-
-** -a:** automatic deployment
-** -h:** display help
-** -v:** automatic deployment + open-vm-tools
+autodeploy.sh [-h] [-a] [-v]
+| flag | description                          |
+|------|--------------------------------------|
+| h    | display help                         |
+| a    | automatic deployment                 |
+| v    | automatic deployment + open-vm-tools |
