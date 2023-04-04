@@ -14,13 +14,21 @@ I wrote this script to learn script bash. It's meant to simplify the process of 
 
 # Usage
 
-autodeploy.sh [-h] [-a] [-v] [-z] [-p] [-c foo bar]
+autodeploy.sh [-h] [-a] [-v] [-z] [-p] [-c 'foo bar']
 
-| flag | description                                                   |
-|------|---------------------------------------------------------------|
-| -h   | display help                                                  |
-| -a   | automatic deployment (same as launching with -zp flag)        |
-| -v   | install open-vm-tools                                         |
-| -z   | install zsh                                                   |
-| -p   | install default packages (git, ffmpeg, bat)                   |
-| -c   | install additional packages [Usage: autodeploy.sh -c foo bar] |
+| flag | description                                                     |
+|------|-----------------------------------------------------------------|
+| -h   | display help                                                    |
+| -a   | automatic deployment (same as launching with -zp flag)          |
+| -v   | install open-vm-tools                                           |
+| -z   | install zsh                                                     |
+| -p   | install default packages (git, ffmpeg, bat)                     |
+| -c   | install additional packages [Usage: autodeploy.sh -c 'foo bar'] |
+
+**autodeploy.sh -ac 'foo bar'**
+
+This will update & upgrade packages, install *zsh*, install *git*, *ffmpeg*, *bat* and install *foo* and *bar*
+
+**autodeploy.sh -av**
+
+This will update & upgrade packages, install *zsh*, install *git*, *ffmpeg*, *bat* and install *open-vm-tools*
