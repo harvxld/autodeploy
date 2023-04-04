@@ -120,3 +120,5 @@ read -p "Choose a number: " num
     esac
     done
 echo "Please logout and login back to your account to switch to Z Shell."
+
+test
